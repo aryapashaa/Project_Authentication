@@ -1,37 +1,34 @@
 ﻿using System;
+using System.ComponentModel.Design;
 
 namespace Project_Authentication;
 
 class Program
 {
-    public static int[] id = new int[5];
-    public static string[] firstName = new string[5];
-    public static string[] lastName = new string[5];
-    public static string[] username = new string[5];
-    public static string[] password = new string[5];
+    public static List<User> banyakUsers = new List<User>();
     static void Main()
+    {
+        Menu();
+    }
+    static void Menu()
     {
         bool key = true;
         do
         {
-            Menu(id, firstName, lastName, username, password);
+            Console.Clear();
+
+            string[] menuTampilan = { "Create", "Show", "Login", "Exit" };
+
+            Console.WriteLine("==BASIC AUTHENTICATION==");
+            for (int i = 0; i < menuTampilan.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {menuTampilan[i]} User");
+            }
+
+            Pilih();
         } while (key);
     }
-    static void Menu(int[] id, string[] firstName, string[] lastName, string[] username, string[] password)
-    {
-        Console.Clear();
-
-        string[] menuTampilan = { "Create", "Show", "Login", "Exit" };
-
-        Console.WriteLine("==BASIC AUTHENTICATION==");
-        for (int i = 0; i < menuTampilan.Length; i++)
-        {
-            Console.WriteLine($"{i + 1}. {menuTampilan[i]} User");
-        }
-
-        PilihMenu(id, firstName, lastName, username, password);
-    }
-    static void PilihMenu(int[] id, string[] firstName, string[] lastName, string[] username, string[] password)
+    static void Pilih()
     {
         Console.Write("Input : ");
         int pilihMenu = Convert.ToInt32(Console.ReadLine());
@@ -39,13 +36,13 @@ class Program
         switch (pilihMenu)
         {
             case 1: //CREATE
-                Create(id, firstName, lastName, username, password);
+                Create();
                 break;
             case 2: //EDIT
-                Edit(id, firstName, lastName, username, password);
+                //View(banyakUsers);
                 break;
             case 3: //LOGIN
-                Login(id, firstName, lastName, username, password);
+                //Login();
                 break;
             case 4: //EXIT
                 System.Environment.Exit(0);
@@ -56,51 +53,67 @@ class Program
                 break;
         }
     }
-    static void Create(int[] id, string[] firstName, string[] lastName, string[] username, string[] password)
+    static void Create()
     {
         Console.Clear();
 
-        for (int i = 0; i < id.Length; i++)
+        User singleUser = new User();
+
+        Console.Write("First Name : ");
+        singleUser.FirstName = Console.ReadLine(); //menentukan First Name
+
+        Console.Write("Last Name : ");
+        singleUser.LastName = Console.ReadLine(); //menentukan Last Name
+
+        singleUser.Username = singleUser.FirstName[..2] + singleUser.LastName.Substring(0, 2); //menentukan Username
+
+        bool check = true;
+        do //menentukan Password
         {
-            if (id[i] == 0)
+            Console.Write("Password : ");
+            string checkPass = Console.ReadLine();
+            if (checkPass.Length >= 8)
             {
-                id[i] = i + 1; //menentukan ID
-
-                Console.Write("First Name : ");
-                firstName[i] = Console.ReadLine(); //menentukan First Name
-
-                Console.Write("Last Name : ");
-                lastName[i] = Console.ReadLine(); //menentukan Last Name
-
-                username[i] = firstName[i].Substring(0, 2) + lastName[i].Substring(0, 2); //menentukan Username
-
-                bool check = true;
-                do //menentukan Password
+                if (checkPass.Any(char.IsUpper))
                 {
-                    Console.Write("Password : ");
-                    string checkPass = Console.ReadLine();
-                    if (checkPass.Length >= 8)
+                    if (checkPass.Any(char.IsLower))
                     {
-                        if (checkPass.Any(char.IsUpper))
+                        if (checkPass.Any(char.IsNumber))
                         {
-                            if (checkPass.Any(char.IsLower))
-                            {
-                                if (checkPass.Any(char.IsNumber))
-                                {
-                                    password[i] = checkPass;
-                                    check = false;
-                                    break;
-                                }
-                            }
+                            singleUser.Password = checkPass;
+                            check = false;
+                            break;
                         }
                     }
-                    Console.WriteLine("\nPassword must have at least 8 characters\r\n with at least one Capital letter, at least one lower case letter and at least one number.\n");
-                } while (check);
-                break;
+                }
             }
+            Console.WriteLine("\nPassword must have at least 8 characters\r\n with at least one Capital letter, at least one lower case letter and at least one number.\n");
+        } while (check);
+
+        for (int i = 0; i <= banyakUsers.Count; i++)
+        {
+            singleUser.Id = i + 1; //menentukan ID
         }
+
+        banyakUsers.Add(singleUser);
+
         Console.Write("\nData user berhasil dibuat");
         Console.ReadKey();
+    }
+    static void View(List<User> banyakUsers)
+    {
+        int i = 0;
+
+        foreach (User n in banyakUsers)
+        {
+            i++;
+            Console.WriteLine("========================");
+            Console.WriteLine($"ID\t: {i}");
+            Console.WriteLine($"Name\t: {n.FirstName} {n.LastName}");
+            Console.WriteLine($"Username: {n.Username}");
+            Console.WriteLine($"Password: {n.Password}");
+            Console.WriteLine("========================");
+        }
     }
     static void Edit(int[] id, string[] firstName, string[] lastName, string[] username, string[] password)
     {
