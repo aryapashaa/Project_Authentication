@@ -39,13 +39,13 @@ class Program
         switch (pilihMenu)
         {
             case 1: //CREATE
-                //Create(id, firstName, lastName, username, password);
+                Create(id, firstName, lastName, username, password);
                 break;
             case 2: //EDIT
-                //Edit(id, firstName, lastName, username, password);
+                Edit(id, firstName, lastName, username, password);
                 break;
             case 3: //LOGIN
-                //Login(id, firstName, lastName, username, password);
+                Login(id, firstName, lastName, username, password);
                 break;
             case 4: //EXIT
                 System.Environment.Exit(0);
