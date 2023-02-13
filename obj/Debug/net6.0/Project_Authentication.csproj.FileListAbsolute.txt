@@ -1,0 +1,15 @@
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\bin\Debug\net6.0\Project_Authentication.exe
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\bin\Debug\net6.0\Project_Authentication.deps.json
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\bin\Debug\net6.0\Project_Authentication.runtimeconfig.json
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\bin\Debug\net6.0\Project_Authentication.dll
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\bin\Debug\net6.0\Project_Authentication.pdb
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\obj\Debug\net6.0\Project_Authentication.csproj.AssemblyReference.cache
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\obj\Debug\net6.0\Project_Authentication.GeneratedMSBuildEditorConfig.editorconfig
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\obj\Debug\net6.0\Project_Authentication.AssemblyInfoInputs.cache
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\obj\Debug\net6.0\Project_Authentication.AssemblyInfo.cs
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\obj\Debug\net6.0\Project_Authentication.csproj.CoreCompileInputs.cache
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\obj\Debug\net6.0\Project_Authentication.dll
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\obj\Debug\net6.0\refint\Project_Authentication.dll
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\obj\Debug\net6.0\Project_Authentication.pdb
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\obj\Debug\net6.0\Project_Authentication.genruntimeconfig.cache
+D:\Profile\Arya\ARYA PASHA GUNAWAN\mcc\TRAINING\Project\Project_Authentication\Project_Authentication\obj\Debug\net6.0\ref\Project_Authentication.dll
