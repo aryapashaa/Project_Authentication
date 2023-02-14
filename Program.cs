@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 
 namespace Project_Authentication;
@@ -15,8 +16,6 @@ class Program
         bool key = true;
         do
         {
-            Console.Clear();
-
             string[] menuTampilan = { "Create", "Show", "Login", "Exit" };
 
             Console.WriteLine("==BASIC AUTHENTICATION==");
@@ -39,10 +38,11 @@ class Program
                 Create();
                 break;
             case 2: //EDIT
-                //View(banyakUsers);
+                View(banyakUsers);
                 break;
             case 3: //LOGIN
-                //Login();
+                Login();
+                Console.Clear();
                 break;
             case 4: //EXIT
                 System.Environment.Exit(0);
@@ -50,6 +50,7 @@ class Program
             default:
                 Console.Write("\nTidak ada pilihan");
                 Console.ReadKey();
+                Console.Clear();
                 break;
         }
     }
@@ -99,42 +100,28 @@ class Program
 
         Console.Write("\nData user berhasil dibuat");
         Console.ReadKey();
+        Console.Clear();
     }
     static void View(List<User> banyakUsers)
-    {
-        int i = 0;
-
-        foreach (User n in banyakUsers)
-        {
-            i++;
-            Console.WriteLine("========================");
-            Console.WriteLine($"ID\t: {i}");
-            Console.WriteLine($"Name\t: {n.FirstName} {n.LastName}");
-            Console.WriteLine($"Username: {n.Username}");
-            Console.WriteLine($"Password: {n.Password}");
-            Console.WriteLine("========================");
-        }
-    }
-    static void Edit(int[] id, string[] firstName, string[] lastName, string[] username, string[] password)
     {
         bool key = true;
         do
         {
             Console.Clear();
 
-            Console.WriteLine("==SHOW USER==");
-            for (int i = 0; i < id.Length; i++)
-            {
-                if (id[i] != 0)
-                {
-                    Console.WriteLine("====================");
-                    Console.WriteLine("ID       : " + id[i]);
-                    Console.WriteLine("Name     : " + firstName[i] + " " + lastName[i]);
-                    Console.WriteLine("Username : " + username[i]);
-                    Console.WriteLine("Password : " + password[i]);
-                    Console.WriteLine("====================");
-                }
-            }
+        Console.WriteLine("==SHOW USER==");
+
+        foreach (User item in banyakUsers)
+        {
+            Console.WriteLine("========================");
+            Console.WriteLine($"ID\t: {item.Id}");
+            Console.WriteLine($"Name\t: {item.FirstName} {item.LastName}");
+            Console.WriteLine($"Username: {item.Username}");
+            Console.WriteLine($"Password: {item.Password}");
+            Console.WriteLine("========================");
+        }
+
+        
             Console.WriteLine("\nMenu");
 
             string[] menuEdit = { "Edit User", "Delete User", "Back" };
@@ -150,76 +137,70 @@ class Program
             switch (pilihEdit)
             {
                 case 1:
-                    for (int i = 0; i < id.Length; i++)
+                    bool kunci = true;
+                    do
                     {
                         Console.Write("\nID yang ingin diubah: ");
                         int ubahId = Convert.ToInt32(Console.ReadLine());
-                        if (id[i] == ubahId)
+
+                        foreach (User item in banyakUsers)
                         {
-                            for (int j = 0; j < id.Length; j++)
+                            if (ubahId == item.Id)
                             {
-                                if (id.Length != null)
+                                Console.Write("First Name : ");
+                                string ubahFirst = Console.ReadLine();
+                                item.FirstName = ubahFirst;
+
+                                Console.Write("Last Name : ");
+                                string ubahLast = Console.ReadLine();
+                                item.LastName = ubahLast;
+
+                                item.Username = item.FirstName[..2] + item.LastName.Substring(0, 2);
+
+                                bool check = true;
+                                do
                                 {
-                                    Console.Write("First Name : ");
-                                    string ubahFirst = Console.ReadLine();
-                                    firstName[ubahId - 1] = ubahFirst;
-
-                                    Console.Write("Last Name : ");
-                                    string ubahLast = Console.ReadLine();
-                                    lastName[ubahId - 1] = ubahLast;
-
-                                    username[ubahId - 1] = firstName[ubahId - 1].Substring(0, 2) + lastName[ubahId - 1].Substring(0, 2);
-
-                                    bool check = true;
-                                    do
+                                    Console.Write("Password : ");
+                                    string ubahPass = Console.ReadLine();
+                                    if (ubahPass.Length >= 8)
                                     {
-                                        Console.Write("Password : ");
-                                        string ubahPass = Console.ReadLine();
-                                        if (ubahPass.Length >= 8)
+                                        if (ubahPass.Any(char.IsUpper))
                                         {
-                                            if (ubahPass.Any(char.IsUpper))
+                                            if (ubahPass.Any(char.IsLower))
                                             {
-                                                if (ubahPass.Any(char.IsLower))
+                                                if (ubahPass.Any(char.IsNumber))
                                                 {
-                                                    if (ubahPass.Any(char.IsNumber))
-                                                    {
-                                                        password[ubahId - 1] = ubahPass;
-                                                        check = false;
-                                                        break;
-                                                    }
-                                                }
+                                                    item.Password = ubahPass;
+                                                    check = false;
+                                                    break;
+                                                }   
                                             }
                                         }
-                                        Console.WriteLine("\nPassword must have at least 8 characters\r\n with at least one Capital letter, at least one lower case letter and at least one number.\n");
-                                    } while (check);
-                                    break;
-                                }
-                            }
+                                    }
+                                    Console.WriteLine("\nPassword must have at least 8 characters\r\n with at least one Capital letter, at least one lower case letter and at least one number.\n");
+                                } while (check);
 
-                            Console.Write("\nUser sudah berhasil diedit");
-                            Console.ReadKey();
-                            break;
+                                Console.Write("\nUser sudah berhasil diedit");
+                                kunci = false;
+                                Console.ReadKey();
+                                goto Selesai;
+                            }
                         }
-                        else
-                        {
-                            Console.WriteLine("\nUser tidak ditemukan !!!\n");
-                            Console.ReadKey();
-                        }
-                    }
+                        Console.Write("\nUser tidak ditemukan !!!\n");
+                        Console.ReadKey();
+                        break;
+                    Selesai:;
+                    } while (kunci);
                     break;
                 case 2:
                     Console.Write("\nID yang ingin dihapus: ");
                     int hapusId = Convert.ToInt32(Console.ReadLine());
 
-                    for (int i = 0; i < id.Length; i++)
+                    foreach (User item in banyakUsers.ToArray())
                     {
-                        if (id.Length != null)
+                        if (hapusId == item.Id)
                         {
-                            id[hapusId - 1] = hapusId - hapusId;
-                            firstName[hapusId - 1] = "";
-                            lastName[hapusId - 1] = "";
-                            username[hapusId - 1] = "";
-                            password[hapusId - 1] = "";
+                            banyakUsers.Remove(item);
                             break;
                         }
                     }
@@ -229,6 +210,7 @@ class Program
                     break;
                 case 3:
                     key = false;
+                    Console.Clear();
                     break;
                 default:
                     Console.Write("\nTidak ada pilihan");
@@ -237,7 +219,7 @@ class Program
             }
         } while (key);
     }
-    static void Login(int[] id, string[] firstName, string[] lastName, string[] username, string[] password)
+    static void Login()
     {
         Console.Clear();
 
@@ -249,9 +231,10 @@ class Program
         string inputPass = Console.ReadLine();
 
         bool status = false;
-        for (int i = 0; i < id.Length; i++)
+
+        foreach (var item in banyakUsers)
         {
-            if (username[i] == inputUser && password[i] == inputPass)
+            if (item.Username == inputUser && item.Password == inputPass)
             {
                 status = true;
                 break;
